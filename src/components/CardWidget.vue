@@ -10,8 +10,29 @@ export default {
     };
   },
   props: {
-    dataWeather: {
-      type: Object,
+    temp: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    tempMin: {
+      type: Number,
+      required: true,
+    },
+    tempMax: {
+      type: Number,
+      required: true,
+    },
+    icon: {
+      type: String,
+      required: true,
     },
     imgUrl: {
       type: String,
@@ -41,7 +62,7 @@ export default {
   },
   mounted() {
     this.getDate();
-    this.identificationСolor(this.dataWeather.main.temp.toFixed());
+    this.identificationСolor(this.temp);
   },
 };
 </script>
@@ -51,25 +72,18 @@ export default {
     <img class="widget__img" :src="imgUrl" alt="Kazan" />
     <div class="widget__inner">
       <div class="widget__top">
-        <div class="widget__temp">{{ dataWeather.main.temp.toFixed() }}°</div>
-        <div class="widget__location">{{ dataWeather.name }}</div>
+        <div class="widget__temp">{{ temp }}°</div>
+        <div class="widget__location">{{ name }}</div>
       </div>
       <div class="widget__box">
         <div class="widget__box-inner">
           <div class="widget__date">{{ dateDayWeek }}, {{ dateDay }} {{ dateMonth }}</div>
           <div class="widget__state">
-            <div class="widget__state-sky">{{ dataWeather.weather[0].description }}</div>
-            <div class="widget__state-temp">
-              {{ dataWeather.main.temp_min.toFixed() }}° /
-              {{ dataWeather.main.temp_max.toFixed() }}°
-            </div>
+            <div class="widget__state-sky">{{ description }}</div>
+            <div class="widget__state-temp">{{ tempMin }}° / {{ tempMax }}°</div>
           </div>
         </div>
-        <img
-          class="widget__icon"
-          :src="`https://openweathermap.org/img/wn/${dataWeather.weather[0].icon}.png`"
-          alt=""
-        />
+        <img class="widget__icon" :src="`https://openweathermap.org/img/wn/${icon}.png`" alt="" />
       </div>
     </div>
   </div>

@@ -60,7 +60,16 @@ export default {
 
 <template>
   <Loader v-if="dataWeather === null" />
-  <CardWidget v-else :dataWeather="dataWeather" :imgUrl="imgUrl" />
+  <CardWidget
+    v-else
+    :imgUrl="imgUrl"
+    :temp="dataWeather.main.temp.toFixed()"
+    :name="dataWeather.name"
+    :description="dataWeather.weather[0].description"
+    :temp-min="dataWeather.main.temp_min.toFixed()"
+    :temp-max="dataWeather.main.temp_max.toFixed()"
+    :icon="dataWeather.weather[0].icon"
+  />
 </template>
 
 <style scoped lang="scss"></style>
